@@ -47,7 +47,7 @@ namespace Sol_MVVM.ViewModels
         #endregion
 
         #region Command
-        public Command OnAddCommand { get; set; }
+        public Command OnAddCommand { get; set; } 
 
         public Command OnClearCommand { get; set; }
 
