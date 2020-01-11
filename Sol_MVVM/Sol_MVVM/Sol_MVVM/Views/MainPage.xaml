@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:Sol_MVVM.ViewModels"
+             mc:Ignorable="d"
+             x:Class="Sol_MVVM.Views.MainPage"
+             x:Name="mainPage"
+             >
+
+    <ContentPage.BindingContext>
+        <local:NotesViewModel></local:NotesViewModel>
+    </ContentPage.BindingContext>
+
+    <!--<StackLayout>
+        --><!-- Place new controls here --><!--
+        <Label Text="Welcome to Xamarin.Forms!" 
+           HorizontalOptions="Center"
+           VerticalOptions="CenterAndExpand" />
+    </StackLayout>-->
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Editor 
+            x:Name="txtNotes"
+            Grid.Row="0" 
+            Grid.Column="0" 
+            Grid.ColumnSpan="2" 
+            Placeholder="Enter the Notes" 
+            Margin="10,10"
+            Text="{Binding NotesM.Notes, Mode=TwoWay}"
+            >
+        </Editor>
+
+        <Button 
+            Grid.Row="1" 
+            Grid.Column="0" 
+            Text="Add" 
+            Margin="10,0" 
+            TextColor="White" 
+            BackgroundColor="Red"
+            Command="{Binding OnAddCommand}"
+            CommandParameter="{Binding Source={x:Reference mainPage}}"
+            >
+        </Button>
+
+        <Button 
+            Grid.Row="1" 
+            Grid.Column="1" 
+            Text="Clear" 
+            Margin="10,0" 
+            TextColor="White" 
+            BackgroundColor="Red" 
+            Command="{Binding OnClearCommand}"
+            CommandParameter="{Binding Source={x:Reference mainPage}}"
+            >
+        </Button>
+
+        <CollectionView 
+            x:Name="cvNotes"
+            Grid.Row="2" 
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            ItemsSource="{Binding NotesList, Mode=TwoWay}"
+            EmptyView="No items to display"
+            >
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Frame 
+                            BackgroundColor="DimGray"
+                            BorderColor="Orange"
+                            Margin="10,5"
+                            >
+                            <Label 
+                                Text="{Binding}" 
+                                FontSize="Title"
+                                TextColor="WhiteSmoke"
+                                ></Label>
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            
+        </CollectionView>
+
+        <Button 
+            Grid.Row="3" 
+            Grid.Column="0" 
+            Grid.ColumnSpan="2"
+            Text="List Clear" 
+            TextColor="White" 
+            BackgroundColor="Red"
+            Command="{Binding OnListClearCommand}"
+            CommandParameter="{Binding Source={x:Reference mainPage}}"
+            >
+        </Button>
+
+    </Grid>
+
+    
+</ContentPage>
