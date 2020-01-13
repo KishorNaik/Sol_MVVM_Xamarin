@@ -3,14 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="clr-namespace:Sol_MVVM.ViewModels"
+             xmlns:VM="clr-namespace:Sol_MVVM.ViewModels"
+             xmlns:CB="clr-namespace:Sol_MVVM.Behaviors"
              mc:Ignorable="d"
              x:Class="Sol_MVVM.Views.MainPage"
              x:Name="mainPage"
              >
 
     <ContentPage.BindingContext>
-        <local:NotesViewModel></local:NotesViewModel>
+        <VM:NotesViewModel></VM:NotesViewModel>
     </ContentPage.BindingContext>
 
     <!--<StackLayout>
@@ -43,7 +44,7 @@
             >
         </Editor>
 
-        <Button 
+        <!--<Button 
             Grid.Row="1" 
             Grid.Column="0" 
             Text="Add" 
@@ -53,6 +54,19 @@
             Command="{Binding OnAddCommand}"
             CommandParameter="{Binding Source={x:Reference mainPage}}"
             >
+        </Button>-->
+
+        <Button 
+            Grid.Row="1" 
+            Grid.Column="0" 
+            Text="Add" 
+            Margin="10,0" 
+            TextColor="White" 
+            BackgroundColor="Red"
+            >
+            <Button.Behaviors>
+                <CB:EventToCommandBehavior EventName="Clicked" Command="{Binding OnAddCommand}" CommandParameter="{Binding Source={x:Reference mainPage}}"></CB:EventToCommandBehavior>
+            </Button.Behaviors>
         </Button>
 
         <Button 
